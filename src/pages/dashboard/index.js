@@ -1,12 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {TextInput, ScrollView} from 'react-native-gesture-handler';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faVideo,
   faPhotoVideo,
   faMapMarker,
   faBars,
+  faPlus,
+  faGlobeAmericas,
 } from '@fortawesome/free-solid-svg-icons';
 
 function dashboard() {
@@ -46,6 +48,78 @@ function dashboard() {
             />
             <Text style={style.postShortcutItemText}>Check-in</Text>
           </View>
+        </View>
+
+        {/** TABS */}
+        <View style={style.tabStory}>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingLeft: 10,
+              paddingRight: 20,
+            }}>
+            <View style={style.tabStorePerson}>
+              <View style={style.tabIcon}>
+                <FontAwesomeIcon icon={faPlus} size="18" />
+              </View>
+              <Text style={style.tabStoreText}>Adicionar ao story</Text>
+            </View>
+            <View style={style.tabStorePerson}>
+              <View style={style.tabIcon}>
+                <FontAwesomeIcon icon={faPlus} size="18" />
+              </View>
+              <Text style={style.tabStoreText}>Adicionar ao story</Text>
+            </View>
+            <View style={style.tabStorePerson}>
+              <View style={style.tabIcon}>
+                <FontAwesomeIcon icon={faPlus} size="18" />
+              </View>
+              <Text style={style.tabStoreText}>Adicionar ao story</Text>
+            </View>
+            <View style={style.tabStorePerson}>
+              <View style={style.tabIcon}>
+                <FontAwesomeIcon icon={faPlus} size="18" />
+              </View>
+              <Text style={style.tabStoreText}>Adicionar ao story</Text>
+            </View>
+            <View style={style.tabStorePerson}>
+              <View style={style.tabIcon}>
+                <FontAwesomeIcon icon={faPlus} size="18" />
+              </View>
+              <Text style={style.tabStoreText}>Adicionar ao story</Text>
+            </View>
+          </ScrollView>
+        </View>
+
+        {/** POSTS */}
+        <View style={style.publications}>
+          <View style={style.publicationHeader}>
+            <Image style={style.publicationAvatar}></Image>
+            <View style={style.publicationName}>
+              <Text style={{fontSize: 14, fontWeight: 'bold'}}>
+                Jefferson Miranda Pires
+              </Text>
+              <Text style={{fontSize: 12, marginTop: 2, color: '#333333'}}>
+                1 h . <FontAwesomeIcon icon={faGlobeAmericas} size="10" />
+              </Text>
+            </View>
+          </View>
+          <View style={style.publicationContent}>
+            <Text>
+              Lorem Ipsum é simplesmente uma simulação de texto da indústria
+              tipográfica e de impressos, e vem sendo utilizado desde o século
+              XVI, quando um impressor desconhecido pegou uma bandeja de tipos e
+              os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum
+              sobreviveu não só a cinco séculos, como também ao salto para a
+              editoração eletrônica, permanecendo essencialmente inalterado. Se
+              popularizou na década de 60, quando a Letraset lançou decalques
+              contendo passagens de Lorem Ipsum, e mais recentemente quando
+              passou a ser integrado a softwares de editoração eletrônica como
+              Aldus PageMaker.
+            </Text>
+          </View>
+          <View style={style.publicationActions}></View>
         </View>
       </View>
     </>
@@ -106,5 +180,60 @@ const style = StyleSheet.create({
     color: '#414c50',
     fontWeight: 'bold',
     marginLeft: 5,
+  },
+
+  tabStory: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    height: 160,
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#fff',
+  },
+  tabStorePerson: {
+    borderRadius: 5,
+    width: 100,
+    backgroundColor: '#d3d3d3',
+    textAlign: 'left',
+    textAlignVertical: 'bottom',
+    marginRight: 10,
+    padding: 10,
+    justifyContent: 'space-between',
+  },
+  tabIcon: {
+    height: 35,
+    width: 35,
+    padding: 8,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+  },
+  tabStoreText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+
+  publications: {
+    backgroundColor: '#fff',
+    minHeight: 250,
+    marginTop: 10,
+  },
+
+  publicationHeader: {
+    padding: 10,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  publicationAvatar: {
+    height: 35,
+    width: 35,
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: '#3360FF',
+    marginRight: 10,
+  },
+  publicationName: {},
+  publicationContent: {
+    padding: 14,
   },
 });
