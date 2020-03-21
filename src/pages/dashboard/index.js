@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {TextInput, ScrollView} from 'react-native-gesture-handler';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import ReadMore from 'react-native-read-more-text';
 import {
   faVideo,
   faPhotoVideo,
@@ -10,14 +11,51 @@ import {
   faPlus,
   faGlobeAmericas,
 } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 function dashboard() {
+  const person = {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/c/c0/Nicolas_Cage_Deauville_2013.jpg',
+    name: 'Nicolas Cage',
+  };
+
+  const posts = [
+    {
+      name: 'Keanu Reeves',
+      avatar:
+        'https://upload.wikimedia.org/wikipedia/commons/f/f2/Keanu_Reeves_2013_%2810615146086%29_%28cropped%29.jpg',
+      imagePost:
+        'https://cdn.ome.lt/vzQlSruPR0Ei5y4mCL37r85wHfU=/1200x630/smart/extras/conteudos/keanu_reeves_Christian_Petersen_GETTY_IMAGES_NORTH_AMERICA_AFP_2.jpg',
+    },
+    {
+      name: 'Jair M. Bolsonaro',
+      avatar:
+        'https://img.r7.com/images/reuters-jair-bolsonaro-11122019102039574?dimensions=460x305&&amp;&amp;resize=460x305&amp;crop=570x378+90+62layout=%27responsive%27',
+      imagePost:
+        'https://ogimg.infoglobo.com.br/in/24313083-dce-46f/FT1086A/652/xJair-Bolsonaro.jpg.pagespeed.ic.TxKcAUjrAd.jpg',
+    },
+    {
+      name: 'Homer Simpson',
+      avatar:
+        'https://www.infomoney.com.br/wp-content/uploads/2019/06/homer-simpson.jpg?fit=900%2C734&quality=75&strip=all',
+      imagePost: 'https://www.rbsdirect.com.br/imagesrc/25304262.jpg?w=700',
+    },
+  ];
+
+  useEffect(() => {});
+
   return (
-    <>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={style.content}>
         {/** POST */}
         <View style={style.post}>
-          <Image style={style.postImage}></Image>
+          <Image
+            style={style.postImage}
+            source={{
+              uri: person.avatar,
+            }}
+          />
           <TextInput style={style.postInput}>
             <Text>No que você está pensando?</Text>
           </TextInput>
@@ -64,65 +102,78 @@ function dashboard() {
                 <FontAwesomeIcon icon={faPlus} size="18" />
               </View>
               <Text style={style.tabStoreText}>Adicionar ao story</Text>
+              <Image
+                source={{uri: person.avatar}}
+                style={{
+                  height: 140,
+                  width: 100,
+                  position: 'absolute',
+                  zIndex: -1,
+                  borderRadius: 5,
+                }}
+              />
             </View>
-            <View style={style.tabStorePerson}>
-              <View style={style.tabIcon}>
-                <FontAwesomeIcon icon={faPlus} size="18" />
+            {posts.map(post => (
+              <View style={style.tabStorePerson}>
+                <Image style={style.tabIcon} source={{uri: post.avatar}} />
+                <Text style={style.tabStoreText}>{post.name}</Text>
+                <Image
+                  source={{uri: post.imagePost}}
+                  style={{
+                    height: 140,
+                    width: 100,
+                    position: 'absolute',
+                    zIndex: -1,
+                    borderRadius: 5,
+                  }}
+                />
               </View>
-              <Text style={style.tabStoreText}>Adicionar ao story</Text>
-            </View>
-            <View style={style.tabStorePerson}>
-              <View style={style.tabIcon}>
-                <FontAwesomeIcon icon={faPlus} size="18" />
-              </View>
-              <Text style={style.tabStoreText}>Adicionar ao story</Text>
-            </View>
-            <View style={style.tabStorePerson}>
-              <View style={style.tabIcon}>
-                <FontAwesomeIcon icon={faPlus} size="18" />
-              </View>
-              <Text style={style.tabStoreText}>Adicionar ao story</Text>
-            </View>
-            <View style={style.tabStorePerson}>
-              <View style={style.tabIcon}>
-                <FontAwesomeIcon icon={faPlus} size="18" />
-              </View>
-              <Text style={style.tabStoreText}>Adicionar ao story</Text>
-            </View>
+            ))}
           </ScrollView>
         </View>
 
         {/** POSTS */}
-        <View style={style.publications}>
-          <View style={style.publicationHeader}>
-            <Image style={style.publicationAvatar}></Image>
-            <View style={style.publicationName}>
-              <Text style={{fontSize: 14, fontWeight: 'bold'}}>
-                Jefferson Miranda Pires
-              </Text>
-              <Text style={{fontSize: 12, marginTop: 2, color: '#333333'}}>
-                1 h . <FontAwesomeIcon icon={faGlobeAmericas} size="10" />
-              </Text>
+        {posts.map(post => (
+          <View style={style.publications}>
+            <View style={style.publicationHeader}>
+              <Image
+                style={style.publicationAvatar}
+                source={{uri: post.avatar}}
+              />
+              <View style={style.publicationName}>
+                <Text style={{fontSize: 14, fontWeight: 'bold'}}>
+                  {post.name}
+                </Text>
+                <Text style={{fontSize: 12, marginTop: 2, color: '#333333'}}>
+                  1 h . <FontAwesomeIcon icon={faGlobeAmericas} size="10" />
+                </Text>
+              </View>
             </View>
+            <View style={style.publicationContent}>
+              <ReadMore numberOfLines={4}>
+                <Text>
+                  Lorem Ipsum é simplesmente uma simulação de texto da indústria
+                  tipográfica e de impressos, e vem sendo utilizado desde o
+                  século XVI, quando um impressor desconhecido pegou uma bandeja
+                  de tipos e os embaralhou para fazer um livro de modelos de
+                  tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como
+                  também ao salto para a editoração eletrônica, permanecendo
+                  essencialmente inalterado. Se popularizou na década de 60,
+                  quando a Letraset lançou decalques contendo passagens de Lorem
+                  Ipsum, e mais recentemente quando passou a ser integrado a
+                  softwares de editoração eletrônica como Aldus PageMaker.
+                </Text>
+              </ReadMore>
+            </View>
+            <Image
+              style={style.publicationContentImage}
+              source={{uri: post.imagePost}}
+            />
+            <View style={style.publicationActions}></View>
           </View>
-          <View style={style.publicationContent}>
-            <Text>
-              Lorem Ipsum é simplesmente uma simulação de texto da indústria
-              tipográfica e de impressos, e vem sendo utilizado desde o século
-              XVI, quando um impressor desconhecido pegou uma bandeja de tipos e
-              os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum
-              sobreviveu não só a cinco séculos, como também ao salto para a
-              editoração eletrônica, permanecendo essencialmente inalterado. Se
-              popularizou na década de 60, quando a Letraset lançou decalques
-              contendo passagens de Lorem Ipsum, e mais recentemente quando
-              passou a ser integrado a softwares de editoração eletrônica como
-              Aldus PageMaker.
-            </Text>
-          </View>
-          <View style={style.publicationActions}></View>
-        </View>
+        ))}
       </View>
-    </>
+    </ScrollView>
   );
 }
 
@@ -146,7 +197,6 @@ const style = StyleSheet.create({
     borderRadius: 50,
     height: 45,
     width: 45,
-    backgroundColor: '#dddddd',
   },
   postInput: {
     marginLeft: 10,
@@ -215,7 +265,6 @@ const style = StyleSheet.create({
 
   publications: {
     backgroundColor: '#fff',
-    minHeight: 250,
     marginTop: 10,
   },
 
@@ -235,5 +284,10 @@ const style = StyleSheet.create({
   publicationName: {},
   publicationContent: {
     padding: 14,
+  },
+  publicationContentImage: {
+    width: '100%',
+    height: 240,
+    backgroundColor: '#dfdfdf',
   },
 });
